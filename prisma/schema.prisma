@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  excerpt     String?
+  category    String
+  author      String?
+  publishedAt DateTime
+  source      String
+  sourceUrl   String   @unique
+  imageUrl    String?
+  trending    Boolean  @default(false)
+  featured    Boolean  @default(false)
+  tags        String?  // JSON string for tags array
+  readTime    Int?     // in minutes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("articles")
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  name          String
+  brand         String
+  category      String
+  price         Float?
+  rating        Float?
+  sustainability Int?     // 0-100 score
+  description   String?
+  pros          String?  // JSON string for pros array
+  cons          String?  // JSON string for cons array
+  imageUrl      String?
+  affiliateUrl  String?
+  inStock       Boolean  @default(true)
+  featured      Boolean  @default(false)
+  reviewCount   Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("products")
+}
+
+model EnvironmentalData {
+  id              String   @id @default(cuid())
+  dataType        String   // temperature, co2, renewable_energy, etc.
+  value           Float
+  unit            String
+  region          String?  // global, north_america, europe, etc.
+  source          String
+  recordedAt      DateTime
+  createdAt       DateTime @default(now())
+
+  @@map("environmental_data")
+}
+
+model RSSSource {
+  id          String   @id @default(cuid())
+  name        String
+  url         String   @unique
+  category    String
+  active      Boolean  @default(true)
+  lastFetched DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("rss_sources")
+}
+
+model ScrapingJob {
+  id          String   @id @default(cuid())
+  jobType     String   // product_review, price_update, etc.
+  targetUrl   String
+  selector    String?  // CSS selector for scraping
+  active      Boolean  @default(true)
+  lastRun     DateTime?
+  nextRun     DateTime?
+  frequency   String   // hourly, daily, weekly
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("scraping_jobs")
+}
