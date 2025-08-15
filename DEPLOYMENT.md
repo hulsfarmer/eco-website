@@ -27,7 +27,7 @@
    - **Region**: Oregon (US West)
    - **Branch**: main
    - **Root Directory**: (비워둠)
-   - **Build Command**: `npm ci && npm run build && npx prisma generate && npx prisma db push`
+   - **Build Command**: `npm install && npx prisma generate && npm run build`
    - **Start Command**: `npm start`
 
 ## 4. 환경 변수 설정
@@ -58,9 +58,14 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_PUBLISHER_ID=ca-pub-xxxxxxxxx
 
 ## 6. 데이터베이스 초기화
 
-배포 완료 후 자동으로 데이터베이스 테이블이 생성됩니다:
-- Prisma가 자동으로 스키마를 적용
-- 첫 번째 방문 시 AI 콘텐츠 생성 시작
+⚠️ **중요**: 웹 서비스 첫 배포 완료 후 수동으로 데이터베이스 테이블을 생성해야 합니다:
+
+1. Render 대시보드에서 Web Service → "Shell" 탭 클릭
+2. 다음 명령어 실행:
+```bash
+npx prisma db push
+```
+3. 테이블 생성 완료 후 웹사이트가 정상 동작합니다
 
 ## 7. 확인 사항
 
@@ -75,6 +80,26 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_PUBLISHER_ID=ca-pub-xxxxxxxxx
 - **Database**: PostgreSQL Free (1GB 제한)
 - **Build Time**: 초기 빌드 5-10분 소요
 - **Cold Start**: 슬립 후 첫 접속 시 지연 발생
+
+## 문제 해결
+
+### 빌드 실패 시
+1. **Node.js 버전 확인**: 18.17.0 이상 필요
+2. **환경 변수 확인**: `DATABASE_URL` 설정 여부
+3. **로그 확인**: Render 대시보드에서 빌드 로그 확인
+
+### 일반적인 에러들
+
+**"There's an error above"**
+- 빌드 명령어를 정확히 입력: `npm install && npx prisma generate && npm run build`
+- PostgreSQL 데이터베이스가 먼저 생성되어 있는지 확인
+
+**"DATABASE_URL not found"**
+- PostgreSQL 데이터베이스를 먼저 생성
+- Internal Database URL을 환경 변수에 정확히 복사
+
+**"Prisma Client Error"**
+- 웹 서비스 첫 배포 후 Shell에서 `npx prisma db push` 실행
 
 ## 업그레이드 옵션
 
