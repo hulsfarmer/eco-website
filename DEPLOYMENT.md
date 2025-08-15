@@ -27,7 +27,7 @@
    - **Region**: Oregon (US West)
    - **Branch**: main
    - **Root Directory**: (비워둠)
-   - **Build Command**: `npm install && npx prisma generate && npm run build`
+   - **Build Command**: `npm run render-build`
    - **Start Command**: `npm start`
 
 ## 4. 환경 변수 설정

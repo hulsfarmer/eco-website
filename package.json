@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "render-build": "npm install && prisma generate && next build"
+    "render-build": "npm ci && npx prisma generate && npm run build"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",
