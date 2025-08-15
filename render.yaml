@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: eco-website
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false  # Will be set manually in Render dashboard
+      - key: DATABASE_URL
+        sync: false  # Will be set to PostgreSQL connection string
+      - key: NEXTAUTH_SECRET
+        sync: false
+      - key: NEXTAUTH_URL
+        sync: false
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: NEXT_PUBLIC_GA_MEASUREMENT_ID
+        sync: false
+      - key: NEXT_PUBLIC_GOOGLE_ADSENSE_PUBLISHER_ID
+        sync: false
+
+  - type: pserv  # PostgreSQL service
+    name: eco-website-db
+    env: postgresql
+    plan: free
+    ipAllowList: []  # Allow connections from anywhere
