@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { AdSenseAutoAds } from "@/components/GoogleAdSense";
+import AutoNewsUpdater from "@/components/AutoNewsUpdater";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -100,6 +101,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
+        <AutoNewsUpdater />
         {children}
         
         {/* Performance monitoring script */}

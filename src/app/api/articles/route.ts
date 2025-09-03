@@ -47,16 +47,14 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      data: {
-        articles: articlesWithMeta,
-        pagination: {
-          page,
-          limit,
-          total: totalCount,
-          totalPages: Math.ceil(totalCount / limit),
-          hasNext: skip + limit < totalCount,
-          hasPrev: page > 1
-        }
+      articles: articlesWithMeta, // Direct access for FeaturedNews component
+      pagination: {
+        page,
+        limit,
+        total: totalCount,
+        totalPages: Math.ceil(totalCount / limit),
+        hasNext: skip + limit < totalCount,
+        hasPrev: page > 1
       }
     });
     
