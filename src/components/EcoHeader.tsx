@@ -18,6 +18,14 @@ const EcoHeader = () => {
     { name: 'About', href: '/about', icon: '🌱' },
   ];
 
+  const handleNavClick = (href: string, name: string) => {
+    console.log(`Navigation clicked: ${name} -> ${href}`);
+    // 강제로 전체 페이지 새로고침을 통한 네비게이션
+    if (href !== pathname) {
+      window.location.href = href;
+    }
+  };
+
   const isActive = (path: string) => pathname === path;
 
   return (
@@ -33,9 +41,9 @@ const EcoHeader = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navigation.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => handleNavClick(item.href, item.name)}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 ${
                   isActive(item.href)
                     ? 'bg-green-700 text-white'
@@ -44,7 +52,7 @@ const EcoHeader = () => {
               >
                 <span className="text-base">{item.icon}</span>
                 <span>{item.name}</span>
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -79,19 +87,21 @@ const EcoHeader = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-green-500">
               {navigation.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                  onClick={() => {
+                    handleNavClick(item.href, item.name);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                     isActive(item.href)
                       ? 'bg-green-700 text-white'
                       : 'text-green-100 hover:bg-green-700 hover:text-white'
                   }`}
-                  onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="mr-2">{item.icon}</span>
                   {item.name}
-                </Link>
+                </button>
               ))}
               <div className="px-3 py-2">
                 <input

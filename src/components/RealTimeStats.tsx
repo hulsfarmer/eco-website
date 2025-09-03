@@ -25,15 +25,15 @@ const RealTimeStats = () => {
 
     loadStats();
 
-    // 실시간 업데이트 시뮬레이션 (30초마다)
+    // 실시간 업데이트 시뮬레이션 (5분마다)
     const interval = setInterval(() => {
       setStats(prev => ({
-        totalViews: prev.totalViews + Math.floor(Math.random() * 3), // 0-2 증가
-        activeUsers: getActiveUsers(), // 활성 사용자는 변동
-        todayViews: prev.todayViews + Math.floor(Math.random() * 5), // 0-4 증가
+        totalViews: prev.totalViews + Math.floor(Math.random() * 2), // 0-1 증가
+        activeUsers: getActiveUsers(), // 활성 사용자만 변동
+        todayViews: prev.todayViews + Math.floor(Math.random() * 2), // 0-1 증가
         isLoading: false,
       }));
-    }, 30000);
+    }, 5 * 60 * 1000); // 5분
 
     return () => clearInterval(interval);
   }, [getTotalViews, getActiveUsers, getTodayViews]);
