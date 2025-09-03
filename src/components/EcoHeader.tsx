@@ -114,10 +114,10 @@ const EcoHeader = () => {
             
             {/* Environmental Stats */}
             <div className="flex items-center space-x-6 text-sm text-green-100">
-              <span>🌡️ Global Temp: +1.2°C</span>
-              <span>🌳 Trees Planted: 12,847</span>
-              <span>♻️ Plastic Saved: 2.4 tons</span>
-              <span>💡 Renewable: 68%</span>
+              <span>🌡️ Global Temp: +1.5°C</span>
+              <span>🌳 Trees Today: {Math.floor(Math.random() * 3000) + 15000}</span>
+              <span>♻️ CO₂ Saved: {(Math.random() * 2 + 3).toFixed(1)} tons</span>
+              <span>💡 Renewables: {Math.floor(Math.random() * 5) + 73}%</span>
             </div>
           </div>
         </div>
