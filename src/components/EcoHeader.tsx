@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import RealTimeStats from './RealTimeStats';
 
 const EcoHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -104,12 +105,22 @@ const EcoHeader = () => {
         )}
       </div>
 
-      {/* Eco Stats Banner */}
-      <div className="bg-green-800 text-center py-2 text-sm text-green-100">
-        <span className="mr-4">🌡️ Global Temp: +1.2°C</span>
-        <span className="mr-4">🌳 Trees Planted Today: 12,847</span>
-        <span className="mr-4">♻️ Plastic Saved: 2.4 tons</span>
-        <span>💡 Renewable Energy: 68%</span>
+      {/* Real-time Stats Banner */}
+      <div className="bg-green-800 py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between space-y-2 lg:space-y-0">
+            {/* Site Statistics */}
+            <RealTimeStats />
+            
+            {/* Environmental Stats */}
+            <div className="flex items-center space-x-6 text-sm text-green-100">
+              <span>🌡️ Global Temp: +1.2°C</span>
+              <span>🌳 Trees Planted: 12,847</span>
+              <span>♻️ Plastic Saved: 2.4 tons</span>
+              <span>💡 Renewable: 68%</span>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
