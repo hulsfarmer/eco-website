@@ -3,8 +3,30 @@ services:
     name: eco-website
     env: node
     plan: free
-    buildCommand: npm install && npx prisma generate && npm run build
+    buildCommand: npm ci && npx prisma generate && npx prisma migrate deploy && npm run build
     startCommand: npm start
+    healthCheckPath: /
+    domains:
+      - eco-website.onrender.com
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NEXT_PUBLIC_BASE_URL
+        value: https://eco-website.onrender.com
+      - key: DATABASE_URL
+        generateValue: true
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://eco-website.onrender.com
+      - key: GOOGLE_ANALYTICS_ID
+        value: ""
+      - key: OPENAI_API_KEY
+        value: ""
+  - type: pserv
+    name: eco-website-postgres
+    plan: free
+    env: docker
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
