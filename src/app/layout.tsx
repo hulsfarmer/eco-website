@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   title: "EcoLife - Your Green Living Guide | Environmental News & Sustainable Tips",
   description: "Discover the latest environmental news, sustainable living tips, and eco-friendly product reviews. Join our community for a greener future.",
   keywords: "environment, sustainability, eco-friendly, green living, climate change, renewable energy, environmental news",
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "EcoLife - Your Green Living Guide",
     description: "Discover the latest environmental news, sustainable living tips, and eco-friendly product reviews.",
-    url: "https://ecolife.com",
+    url: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
     siteName: "EcoLife",
     type: "website",
     images: [
